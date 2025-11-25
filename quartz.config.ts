@@ -1,11 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
-/**
- * Quartz 4 Configuration
- *
- * See https://quartz.jzhao.xyz/configuration for more information.
- */
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "Quartz 4",
@@ -19,6 +14,13 @@ const config: QuartzConfig = {
     baseUrl: "quartz.jzhao.xyz",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
+
+    // ⭐⭐⭐ 핵심 추가 ⭐⭐⭐
+    content: {
+      folder: "content",
+    },
+    // ⭐⭐⭐ 핵심 추가 끝 ⭐⭐⭐
+
     theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
@@ -88,7 +90,6 @@ const config: QuartzConfig = {
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
-      // Comment out CustomOgImages to speed up build time
       Plugin.CustomOgImages(),
     ],
   },
