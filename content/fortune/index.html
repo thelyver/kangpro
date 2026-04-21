@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026년 신년운세 - 낭만백수 강프로</title>
+    <meta name="description" content="낭만백수 강프로와 AI가 알려주는 2026년 운세">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', '맑은 고딕', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        select {
+            cursor: pointer;
+            background-color: white;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .result-container {
+            display: none;
+        }
+
+        .result-container.active {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .fortune-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .fortune-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #d63031;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .fortune-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 1.8;
+            color: #333;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .fortune-section {
+            margin-bottom: 15px;
+        }
+
+        .fortune-section-title {
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .kangpro-message {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3436;
+            line-height: 1.6;
+            border: 3px dashed #ff6b6b;
+        }
+
+        .back-btn {
+            background: #95a5a6;
+            margin-top: 15px;
+        }
+
+        .emoji {
+            font-size: 24px;
+            margin: 0 5px;
+        }
+
+        .user-info {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3436;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .fortune-content {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ 2026년 신년운세 ✨</h1>
+            <p>낭만백수 강프로와 AI가 함께하는</p>
+        </div>
+
+        <div class="content">
+            <!-- 입력 폼 -->
+            <div id="inputForm">
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" placeholder="이름을 입력하세요" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">성별</label>
+                    <select id="gender" required>
+                        <option value="">선택하세요</option>
+                        <option value="male">남성</option>
+                        <option value="female">여성</option>
+                        <option value="other">기타</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">나이</label>
+                    <input type="number" id="age" placeholder="나이를 입력하세요" min="1" max="120" required>
+                </div>
+
+                <button class="btn" onclick="generateFortune()">2026년 운세 보기</button>
+            </div>
+
+            <!-- 결과 -->
+            <div id="resultContainer" class="result-container">
+                <div class="user-info" id="userInfo"></div>
+
+                <div class="fortune-card">
+                    <div class="fortune-title">🔮 2026년 종합운 🔮</div>
+                    <div class="fortune-content" id="fortuneContent"></div>
+                </div>
+
+                <div class="kangpro-message" id="kangproMessage"></div>
+
+                <button class="btn back-btn" onclick="goBack()">다시 보기</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 운세 데이터
+        const fortuneData = {
+            overall: [
+                "올해는 당신에게 큰 변화의 해가 될 것입니다. 새로운 도전을 두려워하지 마세요!",
+                "2026년은 당신의 잠재력이 활짝 피어나는 한 해입니다. 자신감을 가지세요!",
+                "올해는 인간관계에서 많은 발전이 있을 것입니다. 주변 사람들과의 소통을 중요시하세요.",
+                "재물운이 상승하는 한 해입니다. 하지만 계획적인 지출이 필요합니다.",
+                "건강에 특별히 신경 써야 하는 해입니다. 규칙적인 생활 습관을 유지하세요.",
+                "창의성이 샘솟는 한 해입니다. 새로운 취미나 프로젝트를 시작하기 좋은 시기입니다.",
+                "안정과 평화가 함께하는 한 해가 될 것입니다. 여유를 즐기세요.",
+                "학습과 성장의 해입니다. 배우고 싶었던 것들에 도전하세요!"
+            ],
+            love: [
+                "사랑운이 매우 좋습니다. 새로운 만남이나 관계의 진전이 기대됩니다.",
+                "기존 관계가 더욱 깊어지는 한 해입니다. 솔직한 대화가 중요합니다.",
+                "사랑보다는 자기 발전에 집중하는 것이 좋은 시기입니다.",
+                "운명적인 만남이 기다리고 있을 수 있습니다. 마음을 열어두세요.",
+                "관계에서 인내심이 필요한 시기입니다. 서두르지 마세요."
+            ],
+            career: [
+                "직장에서 인정받을 기회가 많습니다. 적극적으로 의견을 제시하세요.",
+                "커리어 전환을 고려하기 좋은 시기입니다. 용기를 내세요!",
+                "팀워크가 중요한 한 해입니다. 협력을 통해 큰 성과를 이룰 수 있습니다.",
+                "새로운 프로젝트나 업무에 도전하세요. 좋은 결과가 있을 것입니다.",
+                "꾸준함이 성공의 열쇠입니다. 지금의 노력이 빛을 발할 것입니다."
+            ],
+            wealth: [
+                "재물운이 상승합니다. 하지만 충동구매를 조심하세요.",
+                "투자보다는 저축에 집중하는 것이 좋은 시기입니다.",
+                "예상치 못한 수입이 생길 수 있습니다. 현명하게 관리하세요.",
+                "재정 계획을 세우기 좋은 해입니다. 장기적인 목표를 설정하세요.",
+                "지출이 많아질 수 있는 시기입니다. 계획적인 소비가 필요합니다."
+            ],
+            health: [
+                "전반적으로 건강한 한 해입니다. 꾸준한 운동으로 더욱 활기찬 생활을 하세요.",
+                "스트레스 관리가 중요합니다. 명상이나 취미 활동으로 마음의 평화를 찾으세요.",
+                "정기적인 건강 검진을 받으세요. 예방이 최선입니다.",
+                "충분한 휴식이 필요한 시기입니다. 워라밸을 지키세요.",
+                "새로운 건강 습관을 시작하기 좋은 해입니다. 작은 변화부터 시작하세요."
+            ]
+        };
+
+        // 강프로 메시지
+        const kangproMessages = [
+            "낭만백수 강프로와 AI로 함께하는 2026년이 되세요! 🎉",
+            "강프로가 응원합니다! AI와 함께 즐거운 2026년 만들어가요! 🚀",
+            "2026년, 강프로랑 AI랑 놀아요! 재미있는 한 해 보내세요! 🎪",
+            "낭만백수의 삶도 나쁘지 않죠? AI와 함께라면 더 즐거워요! 🌈",
+            "강프로와 AI가 당신의 2026년을 응원합니다! 화이팅! 💪",
+            "AI 시대, 강프로와 함께 낭만적으로 살아봅시다! 🎨",
+            "2026년에는 강프로처럼 여유롭게! AI와 함께라면 가능해요! ☕",
+            "낭만백수 강프로의 비법: AI와 친해지기! 함께 2026년 즐겨요! 🎯",
+            "AI가 일하고 우리는 놀아요! 강프로와 함께하는 2026년! 🎮",
+            "강프로표 2026년 생존법: AI와 친구 되기! 같이 해요! 🤝",
+            "낭만이 필요한 시대! 강프로와 AI가 함께합니다! 2026년 파이팅! 🌟",
+            "AI 시대의 낭만백수가 되어보세요! 강프로가 알려드릴게요! 📚"
+        ];
+
+        // 간단한 해시 함수
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash);
+        }
+
+        // 운세 생성 함수
+        function generateFortune() {
+            const name = document.getElementById('name').value.trim();
+            const gender = document.getElementById('gender').value;
+            const age = document.getElementById('age').value;
+
+            if (!name || !gender || !age) {
+                alert('모든 항목을 입력해주세요!');
+                return;
+            }
+
+            // 사용자 정보로 시드 생성
+            const seed = simpleHash(name + gender + age);
+
+            // 성별에 따른 호칭
+            let genderText = '';
+            if (gender === 'male') genderText = '님';
+            else if (gender === 'female') genderText = '님';
+            else genderText = '님';
+
+            // 운세 선택 (시드 기반으로 일관성 있게)
+            const overall = fortuneData.overall[seed % fortuneData.overall.length];
+            const love = fortuneData.love[(seed * 2) % fortuneData.love.length];
+            const career = fortuneData.career[(seed * 3) % fortuneData.career.length];
+            const wealth = fortuneData.wealth[(seed * 5) % fortuneData.wealth.length];
+            const health = fortuneData.health[(seed * 7) % fortuneData.health.length];
+
+            // 강프로 메시지 선택
+            const kangproMsg = kangproMessages[(seed * 11) % kangproMessages.length];
+
+            // 결과 표시
+            document.getElementById('userInfo').innerHTML =
+                `<span class="emoji">🎊</span> ${name}${genderText} (${age}세)의 2026년 운세 <span class="emoji">🎊</span>`;
+
+            document.getElementById('fortuneContent').innerHTML = `
+                <div class="fortune-section">
+                    <div class="fortune-section-title">📌 종합운</div>
+                    ${overall}
+                </div>
+                <div class="fortune-section">
+                    <div class="fortune-section-title">💖 애정운</div>
+                    ${love}
+                </div>
+                <div class="fortune-section">
+                    <div class="fortune-section-title">💼 직업운</div>
+                    ${career}
+                </div>
+                <div class="fortune-section">
+                    <div class="fortune-section-title">💰 재물운</div>
+                    ${wealth}
+                </div>
+                <div class="fortune-section">
+                    <div class="fortune-section-title">🏥 건강운</div>
+                    ${health}
+                </div>
+            `;
+
+            document.getElementById('kangproMessage').innerHTML =
+                `<span class="emoji">🎯</span><br>${kangproMsg}`;
+
+            // 화면 전환
+            document.getElementById('inputForm').style.display = 'none';
+            document.getElementById('resultContainer').classList.add('active');
+        }
+
+        // 다시 보기
+        function goBack() {
+            document.getElementById('inputForm').style.display = 'block';
+            document.getElementById('resultContainer').classList.remove('active');
+
+            // 입력 필드 초기화
+            document.getElementById('name').value = '';
+            document.getElementById('gender').value = '';
+            document.getElementById('age').value = '';
+        }
+
+        // Enter 키로 제출
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        generateFortune();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
